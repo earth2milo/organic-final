@@ -1,4 +1,4 @@
-import { useEffect, useCallback,  } from "react"; 
+import { useEffect, useCallback} from "react"; 
 import { useRouter } from "next/router"; 
 import Header from "@/app/components/Header";
 import CreatePostForm from "@/app/components/CreatePostForm";
@@ -50,7 +50,7 @@ export default function CreatePost( {  isLoggedIn, userInformation } ) {
         <>
         <main>
             <h1>Create Post</h1>
-            <CreatePostForm/> 
+            <CreatePostForm createPostFunction={createPostFunction}/> 
         </main>
         </>
     );

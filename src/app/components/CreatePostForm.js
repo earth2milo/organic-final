@@ -1,14 +1,12 @@
 import { useState } from "react";
 import styles from "./components.module.css";
-const CreatePostForm = ({ createPostFunction }) => {
+
+const CreatePostForm = ({createPostFunction}) => {
     const [imageUpload, setImageUpload] = useState();
     return (
         <div>
             <h2>Create Post Form</h2>
-            <form 
-            className={styles.Form}
-            onSubmit={(e) => createPostFunction(e, imageUpload)}
-            >
+            <form className={styles.Form} onSubmit={(e) => createPostFunction(e, imageUpload)}>
             <label htmlFor="postContent">Post Content</label>
             <input type text="text" id="postContent" name="postContent" />
             <label htmlFor="image">Image</label>
