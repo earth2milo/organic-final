@@ -7,8 +7,7 @@ onAuthStateChanged,
 signInWithEmailAndPassword,
 signOut,    
 } from "firebase/auth"
-import {getFirestore, collection, setDoc} from "firebase/firestore";
-
+import {getFirestore, collection, addDoc, setDoc} from "firebase/firestore";
 import Header from "@/app/components/Header"; 
 import firebaseConfig from "../app/components/fireBaseConfig";
 
@@ -21,39 +20,40 @@ export default function MyApp( { Component, pageProps }) {
 
     const createUser = useCallback(
         (e) => {
-        e.preventDefault();
-        const name = e.currentTarget.name.value;
-        const email = e.currentTarget.email.value;
-        const password = e.currentTarget.password.value;
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            
-            // user is logged in so true.
-            const db = getFirestore;
-            const data = addDoc(collection(db, "users"), {
-                name:name,
+          e.preventDefault();
+          const name = e.currentTarget.name.value;
+          const email = e.currentTarget.email.value;
+          const password = e.currentTarget.password.value;
+          const auth = getAuth();
+          createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              const user = userCredential.user;
+              
+              // user is logged in so true.
+              const db = getFirestore(); // Corrected function invocation here
+              const data = addDoc(collection(db, "users"), {
+                name: name,
                 userId: user.uid,
-            });
-            if(data) {
-            setIsLoggedIn(true);
-            // provide user info
-            setUserInformation(user);
-            // clear errors
-            setError(null);
-            }
-        })
+              });
+              
+              if (data) { // Corrected position of closing brace for addDoc
+                setIsLoggedIn(true);
+                // provide user info
+                setUserInformation(user);
+                // clear errors
+                setError(null);
+              }
+            })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.warn({error, errorCode, errorMessage});
-                setError(errorMessage);
-        });
-        
-        
-    }, [setError, setIsLoggedIn, setUserInformation]); 
-
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.warn({ error, errorCode, errorMessage });
+              setError(errorMessage);
+            });
+        },
+        [setError, setIsLoggedIn, setUserInformation]
+      );
+      
     const loginUser = useCallback(
         (e) => {
             e.preventDefault();
@@ -131,8 +131,7 @@ export default function MyApp( { Component, pageProps }) {
             loginUser={loginUser}
             isLoggedIn={isLoggedIn}
             userInformation={userInformation}
-            />
-        <p>{error}</p>
+        />
+            <p>{error}</p>
         </>
-    ); 
-}
+    )}; 

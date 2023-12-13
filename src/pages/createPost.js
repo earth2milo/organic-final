@@ -1,8 +1,9 @@
-import { useEffect } from "react"; 
+import { useEffect, useCallback,  } from "react"; 
 import { useRouter } from "next/router"; 
 import Header from "@/app/components/Header";
 import CreatePostForm from "@/app/components/CreatePostForm";
-import {getFirestore, collection, setDoc} from "firebase/firestore";
+import {getFirestore, collection, addDoc, setDoc} from "firebase/firestore";
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 
 
 export default function CreatePost( {  isLoggedIn, userInformation } ) {
@@ -12,14 +13,34 @@ export default function CreatePost( {  isLoggedIn, userInformation } ) {
     }, [isLoggedIn]);
     
     const createPostFunction = useCallback(
-        async (e) =>  {
-    e.preventDefault();
-    const postContent = e.currentTarget.postContent.value;
-    const userId = userInformation.uid;
+        async (e, imageUpload) =>  {
+    e.preventDefault(); // stops form from submitting until we tell it to.
+    const storage = getStorage();
     const db = getFirestore();
-    await setDoc(collection(db, "posts"),{
+    // get post content from form
+    const postContent = e.currentTarget.postContent.value;
+    // image variable
+    let imageURL;
+    const storageRef = ref(storage, imageUpload.name);
+
+        await uploadBytes(storageRef, imageUpload)
+        .then(async (snapshot) => {
+            await getDownloadURL(snapshot.ref).then((url) => {
+                imageURL=url;
+            });
+        })
+        .catch((error) => {
+            console.warn(error);
+        });
+    
+   
+            // get user information to link post to user
+    const userId = userInformation.uid;
+            // send post to firebase with addDoc
+    const data = await addDoc(collection(db, "posts"), { 
         postContent:postContent,
         userId: userId,
+        imageURL, 
     });
     if(data) {
      router.push("/");   

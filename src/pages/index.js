@@ -1,19 +1,31 @@
-import { useEffect } from "react"; 
-import { useRouter } from "next/router"; 
-import Header from "@/app/components/Header";
-import CreateUserForm from "@/app/components/CreateUserForm";
+import {useEffect, useMemo, useState} from "react";
+import { useRouter } from "next/router";
+import { getDocs, getFirestore, collection} from "firebase/firestore";
+import PostCard from "@/app/components/PostCard";
+export default function Dashboard({ isLoggedIn }) {
+    const router = useRouter();
+    const [allPosts, setAllPosts] = useState([]);
 
-export default function Create( { createUser, isLoggedIn } ) {
-    const router = useRouter(); 
     useEffect(() => {
-        if (isLoggedIn) router.push("/"); 
-    }, [isLoggedIn]); 
+    async function getAllPosts() {
+        const postsArray = [];
+        const db = getFirestore();
+        const postsQuery = await getDocs(collection(db, "posts"));
+
+        postsQuery.forEach((post) => {
+            postsArray.push({ id: post.id, ...post.data() });
+        });
+        setAllPosts(postsArray);
+    }
+    getAllPosts();
+    }, []);
+
     return (
-        <>
         <main>
-            <h1>Create User</h1>
-            <CreateUserForm createUser={createUser}/> 
+        <h1> Dashboard</h1>
+        {allPosts.map((post, i) => (
+           <PostCard post={post} key={i} />
+        ))}
         </main>
-        </>
-    )
-} 
+    );
+}
