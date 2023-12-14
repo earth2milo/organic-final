@@ -1,11 +1,16 @@
 import styles from "./components.module.css"; 
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, user}) => {
     return (
-        <div className={styles.UserProfile}>
-            <img src={post.imageURL} alt="" />
-            <p>{post.postContent}</p>
+        <div className={styles.PostCardContainer}>
+        <div className={styles.PostCard}>
+            <div className={styles.ImageContainer}>
+                 <img src={post.imageURL} alt="" />
+            </div>
+            <p className={styles.PostContent}>{post.postContent}</p>
         </div>
+        </div>
+
     ); 
 }; 
 

@@ -1,16 +1,320 @@
-.Header { 
-    align-items: center;
+/* Header styling */
+
+.Header {
+    color: rgb(255, 255, 255);
+    padding: 20px;
+  }
+  
+  .Logo {
+  position: relative;
+  margin-right:500px;
+  width:300px;
+  height:80px;
+
+  }
+
+  .HeaderNav {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
-    padding: 10px 25px; 
+  }
+  
+  .HeaderNav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+  }
+  
+  .HeaderNav a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .HeaderNav a:last-child {
+    margin-right: 0;
+  }
+  
+/* User Profile Styling */
+
+.UserProfile {
+    background-color: #333;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 500px;
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .UserProfile h2 {
+    font-size: 20px;
+    color:wheat;
+    margin-bottom: 10px;
+  }
+  
+  .UserProfile p {
+    margin-bottom: 5px;
+  }
+
+  /* Post Card Styling */
+
+  .PostCard {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+   
+  }
+  
+  .PostImage {
+    max-width: 300px; 
+    max-height: 300px; 
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    margin-bottom: 10px;
+
+  }
+  
+  .PostContent {
+    font-size: 16px;
+    color:wheat;
+    line-height: 1.5;
+  }
+
+/* Login Form + Create User Form Styling */
+
+
+.loginContainer {
+  display: flex;
+  color:white;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.inputField {
+  margin-bottom: 15px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  
+}
+
+.loginButton {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(128, 69, 206);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.loginButton:hover {
+  background-color: #238636;
+}
+
+/* container for create user form */ 
+
+.createContainer {
+  color:white;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  margin-top: 50px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+
+.labelTitle {
+  color:white;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+
+/* Create Post Styling */
+
+/* CreatePostForm.module.css */
+
+/* Wrapper styles */
+.wrapper {
+  background-color: rgb(55, 54, 54);
+  border: 1px solid #ccc;
+  padding: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styles for form elements */
+.inputGroup {
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Label styles */
+.label {
+  display: block;
+  margin-bottom: 5px;
+  color: white;
+}
+
+/* Textarea styles */
+.textarea {
+  width: 100%;
+  height: 100px;
+  margin-top:5px;
+  resize: vertical;
+  background-color: white;
+  color: black;
+}
+
+/* File input styles */
+.fileInput {
+  display: inline-block;
+  cursor: pointer;
+  color:white;
+  text-align: center;
+  width: 100%;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+  padding: 10px 10px;
 
 }
 
-.HeaderNav a {
-    padding: 1px;
-    margin: 1 auto;
-    color: black;
-    font-size: 22px;
-    font-weight: bold;
-    text-decoration: none;
+/* Apply hover effect to file input */
+.fileInput:hover {
+  background-color:wheat;
+}
+
+/* Hide default file input appearance */
+.fileInput::-webkit-file-upload-button {
+  display: none;
+}
+
+/* Style for the label */
+.customFileUpload {
+  display: block;
+  cursor: pointer;
+  background-color: rgb(54, 54, 54);
+  color: white;
+  border: none;
+  border-radius: 8px; 
+margin-top:5px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  text-align: center;
+  line-height: 30px; 
+}
+
+
+/* Image preview styles */
+.imagePreview {
+  width: 100%;
+  height: 200px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  flex-shrink: 0;
+  margin-top: 10px;
+}
+
+/* Dashboard / Feed Styling */
+
+.MOTD {
+  margin: 25px;
+  padding: 25px;
+  border: 2px solid #ccc;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  color:white;
+}
+
+/* animation framework for Message of the Day */
+
+@keyframes moveBorder {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.MOTD:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  box-sizing: border-box;
+  animation: moveBorder 4s linear infinite;
+}
+
+/* Post Card Styling */ 
+
+.PostCardContainer {
+  display: flex;
+  flex-direction: column; /* Ensure PostCard components stack vertically */
+  align-items: center;
+}
+
+.PostCard {
+  width: 800px;
+  display:flex;
+  padding: 25px;
+  margin-bottom: 20px;
+  flex-direction: column;
+  align-items:center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.ImageContainer {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.PostImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center center;
+}
+
+.UserName {
+
+  font-size: 14px;
+  font-style: italic;
+  color: #888;
+
 }

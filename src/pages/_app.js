@@ -10,6 +10,7 @@ signOut,
 import {getFirestore, collection, addDoc, setDoc} from "firebase/firestore";
 import Header from "@/app/components/Header"; 
 import firebaseConfig from "../app/components/fireBaseConfig";
+import '../app/components/global.css';
 
 export default function MyApp( { Component, pageProps }) {
     const [appIntialized, setAppIntialized] = useState(false); 

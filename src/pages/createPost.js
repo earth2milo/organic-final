@@ -4,7 +4,7 @@ import Header from "@/app/components/Header";
 import CreatePostForm from "@/app/components/CreatePostForm";
 import {getFirestore, collection, addDoc, setDoc} from "firebase/firestore";
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
-
+import styles from "../app/components/components.module.css"; 
 
 export default function CreatePost( {  isLoggedIn, userInformation } ) {
     const router = useRouter(); 
@@ -47,11 +47,22 @@ export default function CreatePost( {  isLoggedIn, userInformation } ) {
     }
 }, [addDoc, collection, getFirestore, userInformation, router]);
     return (
-        <>
-        <main>
-            <h1>Create Post</h1>
-            <CreatePostForm createPostFunction={createPostFunction}/> 
-        </main>
-        </>
+    <div className={styles.wrapper}>
+        <form onSubmit={(e) => createPostFunction(e, e.currentTarget.imageUpload.files[0])}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="postContent" className={styles.label}>Post Content:</label>
+          <textarea name="postContent" className={styles.textarea} />
+        </div>
+        <div className={styles.inputGroup}>
+          <label htmlFor="imageUpload" className={styles.customFileUpload}>
+            Choose File
+            <input type="file" name="imageUpload" id="imageUpload" className={styles.fileInput} />
+          </label>
+        </div>
+  
+        <button type="submit" className={styles.submitButton}>Submit</button>
+      </form>
+    </div>
     );
-};
+  }
+    
