@@ -25,7 +25,7 @@ const [allPosts, setAllPosts] = useState([]);
         <main>
         <div className={styles.MOTD}>
             <h2> Welcome to OpenArt, a gallery style social media site for sharing generative art.</h2>
-            <p> Make an account, view other people's content, and share the generative art you find! </p>
+            <p> Make an account, view other subscribers content, and share the generative art you find! </p>
         </div>
         {allPosts.map((post, i) => (
            <PostCard post={post} key={i} />
